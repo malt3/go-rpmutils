@@ -107,7 +107,13 @@ func (pr *payloadReader) Next() (FileInfo, error) {
 		return nil, errors.New("invalid file index")
 	}
 	pr.index = index
-	return pr.files[index], nil
+	fInfo := pr.files[index]
+	fInfo.uid = hdr.Uid()
+	fInfo.gid = hdr.Gid()
+	fInfo.devminor = hdr.Devminor()
+	fInfo.devmajor = hdr.Devmajor()
+	fInfo.nlink = hdr.Nlink()
+	return fInfo, nil
 }
 
 // Read bytes from the file returned by the preceding call to Next()

@@ -29,6 +29,11 @@ type FileInfo interface {
 	Linkname() string
 	Device() int
 	Inode() int
+	UID() int
+	GID() int
+	DevMajor() int
+	DevMinor() int
+	NLink() int
 }
 
 type fileInfo struct {
@@ -42,7 +47,12 @@ type fileInfo struct {
 	mode      uint32
 	linkName  string
 	device    uint32
+	devmajor  int
+	devminor  int
 	inode     uint32
+	uid       int
+	gid       int
+	nlink     int
 }
 
 // Name returns the full path of the file
@@ -106,4 +116,24 @@ func (fi *fileInfo) fileType() uint32 {
 
 func (fi *fileInfo) inode64() uint64 {
 	return (uint64(fi.device) << 32) | uint64(fi.inode)
+}
+
+func (fi *fileInfo) UID() int {
+	return fi.uid
+}
+
+func (fi *fileInfo) GID() int {
+	return fi.gid
+}
+
+func (fi *fileInfo) DevMajor() int {
+	return fi.devmajor
+}
+
+func (fi *fileInfo) DevMinor() int {
+	return fi.devminor
+}
+
+func (fi *fileInfo) NLink() int {
+	return fi.nlink
 }
