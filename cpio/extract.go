@@ -24,7 +24,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/sassoftware/go-rpmutils/fileutil"
+	"github.com/malt3/go-rpmutils/fileutil"
 )
 
 // Standard set of permission bit masks.
